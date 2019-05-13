@@ -144,7 +144,7 @@ var writeAADocuString = function (s) {
         var toSearch = s.linkTrackVars;
         if (s.linkTrackVars.indexOf('events') > -1) {
             // linkTrackVars containts the string "events", add events to search string
-            tosearch += ',' + cleanEventString(s.linkTrackEvents); 
+            toSearch += ',' + cleanEventString(s.linkTrackEvents); 
         }
         return toSearch;
     }
