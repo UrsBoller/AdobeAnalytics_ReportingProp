@@ -31,5 +31,6 @@ After you send your codes to Adobe Analytics by implementing the code above, you
 2) <strong>Sheet "DecodeDocuString"</strong> lets you inspect the new string on the server call. just copy the full string from your Adobe Analytics server call to the marked field and see what codes have been collected. The table uses the classification sheet to lookup the friendly names of all codes.
 
 ## Please test before publishing (and Disclaimer)
-I strongly recommend to test the code after you add it to your Analytics Tool and before you publish for the live website. Even if we tryed to keep the code as clean and fast as possible, there might be bad situation we haven't seen yet. 
+I strongly recommend to test the code after you add it to your Analytics Tool and before you publish for the live website. Even if we tryed to keep the code as clean and fast as possible, there might be bad situation we haven't seen yet.
+
 <strong>I do not make any warranties about the completeness, reliability and accuracy of this code. Any action you take upon the code is strictly at your own risk, and I will not be liable for any losses or damages by the code</strong>
