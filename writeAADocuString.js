@@ -162,10 +162,10 @@ var writeAADocuString = function (s) {
                 // add event-name without additional information (event serialization or counter event)
                 if (events[key].indexOf("=")>0) {
                     // counter event: skip counter
-                    eventStringCleaned += ',' + events[key].substr(0,events[key].indexOf("="));
+                    eventStringCleaned += ',' + events[key].substring(0,events[key].indexOf("="));
                 } else if(events[key].indexOf(":")>0) {
                     // event serialization: skip serialization string
-                    eventStringCleaned += ',' + events[key].substr(0,events[key].indexOf(":"));
+                    eventStringCleaned += ',' + events[key].substring(0,events[key].indexOf(":"));
                 } else {
                     eventStringCleaned += ',' + events[key];
                 }
