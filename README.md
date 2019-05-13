@@ -1,7 +1,7 @@
 # Adobe Analytics Reporting 2.0
 During the Adobe Summit EMEA 2019 in London I presented a new way to add a documentation direcly to workspace projects. You can read a blog post about my tip at [webanalyticsfordevelopers.com/2019/05/15/adobe-analytics-documentation-2-0/](https://webanalyticsfordevelopers.com/2019/05/15/adobe-analytics-documentation-2-0/)
 
-In this github I uploaded the whole source code as well as additional information to make it as easy as possible.
+In this github I uploaded the whole source code as well as additional information to make it as easy as possible. I want to thank [Jan Exner](https://github.com/janexner) and [Benedikt Wedenik](http://wedenik.com/) for their help in getting the code up and running.
 
 ## Source code for your Adobe Analytics Tag Manager
 Either in "Adobe DTM" oder "Launch, by Adobe" you need to add code to the Adobe Analytics "Custom Code". Basically you add a new function "writeAADocuString" and call it from inside s.doPlugins. You're custom code should look something like this:
