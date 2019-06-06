@@ -184,7 +184,7 @@ var writeAADocuString = function (s) {
             return _satellite.your_company.varsMap;
         }
 
-        var digitsStr = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+-";
+        var digitsStr = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_";
         var eVarOffset = 0;
         var eVarNum = 250;
         var propOffset = 300;
