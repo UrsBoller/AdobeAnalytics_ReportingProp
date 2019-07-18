@@ -144,7 +144,7 @@ var writeAADocuString = function (s) {
         var toSearch = s.linkTrackVars;
         if (s.linkTrackVars.indexOf('events') > -1) {
             // linkTrackVars containts the string "events", add events to search string
-            toSearch += ',' + cleanEventString(s.linkTrackEvents); 
+            tosearch += ',' + cleanEventString(s.linkTrackEvents); 
         }
         return toSearch;
     }
@@ -162,10 +162,10 @@ var writeAADocuString = function (s) {
                 // add event-name without additional information (event serialization or counter event)
                 if (events[key].indexOf("=")>0) {
                     // counter event: skip counter
-                    eventStringCleaned += ',' + events[key].substring(0,events[key].indexOf("="));
+                    eventStringCleaned += ',' + events[key].substr(0,events[key].indexOf("="));
                 } else if(events[key].indexOf(":")>0) {
                     // event serialization: skip serialization string
-                    eventStringCleaned += ',' + events[key].substring(0,events[key].indexOf(":"));
+                    eventStringCleaned += ',' + events[key].substr(0,events[key].indexOf(":"));
                 } else {
                     eventStringCleaned += ',' + events[key];
                 }
@@ -184,7 +184,7 @@ var writeAADocuString = function (s) {
             return _satellite.your_company.varsMap;
         }
 
-        var digitsStr = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_";
+        var digitsStr = "0123456789abcdefghijklmnopqrstuvwxyz+-_";
         var eVarOffset = 0;
         var eVarNum = 250;
         var propOffset = 300;
@@ -193,56 +193,56 @@ var writeAADocuString = function (s) {
         var eventNum = 1000;
 
         var varsMap = {};
-        for (var i = 0; i < 25; i++) {
-            for (var j = 0; j < 64; j++) {
-                var base64Code = "";
+        for (var i = 0; i < 39; i++) {
+            for (var j = 0; j < 39; j++) {
+                var base39Code = "";
                 if (0 === i) {
-                    base64Code = digitsStr.charAt(j);
+                    base39Code = digitsStr.charAt(j);
                 } else {
-                    base64Code = digitsStr.charAt(i) + digitsStr.charAt(j);
+                    base39Code = digitsStr.charAt(i) + digitsStr.charAt(j);
                 }
-                if ((i * 64 + j > eVarOffset) && (i * 64 + j <= (eVarOffset + eVarNum))) {  // eVars from 0 to 250/299
-                    varsMap["eVar" + (i * 64 + j)] = base64Code;
-                } else if ((i * 64 + j > propOffset) && (i * 64 + j <= (propOffset + propNum))) {  // props from 300 to 375/499
-                    varsMap["prop" + (i * 64 + j - propOffset)] = base64Code;
-                } else if ((i * 64 + j > eventOffset) && (i * 64 + j <= (eventOffset + eventNum))) {
-                    varsMap["event" + (i * 64 + j - eventOffset)] = base64Code;
+                if ((i * 39 + j > eVarOffset) && (i * 39 + j <= (eVarOffset + eVarNum))) {  // eVars from 0 to 250/299
+                    varsMap["eVar" + (i * 39 + j)] = base39Code;
+                } else if ((i * 39 + j > propOffset) && (i * 39 + j <= (propOffset + propNum))) {  // props from 300 to 375/499
+                    varsMap["prop" + (i * 39 + j - propOffset)] = base39Code;
+                } else if ((i * 39 + j > eventOffset) && (i * 39 + j <= (eventOffset + eventNum))) {
+                    varsMap["event" + (i * 39 + j - eventOffset)] = base39Code;
                 }
             }
         }
 
-        varsMap['pageName'] = "6G";
-        varsMap['customLink'] = "6H";
-        varsMap['downloadLink'] = "6I";
-        varsMap['exitLink'] = "6J";
+        varsMap['pageName'] = "aa";
+        varsMap['customLink'] = "ab";
+        varsMap['downloadLink'] = "ac";
+        varsMap['exitLink'] = "ad";
+        
+        varsMap['channel'] = "ae";
+        varsMap["campaign"] = "af";
+        varsMap['products'] = "ag";
+        varsMap['purchaseID'] = "ah";
+        varsMap['server'] = "ai";
+        varsMap['state'] = "aj";
+        varsMap['transactionID'] = "ak";
+        varsMap['zip'] = "al";
 
-        varsMap['channel'] = "6K";
-        varsMap["campaign"] = "6L";
-        varsMap['products'] = "6M";
-        varsMap['purchaseID'] = "6N";
-        varsMap['server'] = "6O";
-        varsMap['state'] = "6P";
-        varsMap['transactionID'] = "6Q";
-        varsMap['zip'] = "6R";
+        varsMap['list1'] = "au";
+        varsMap['list2'] = "av";
+        varsMap['list3'] = "aw";
 
-        varsMap['list1'] = "6a";
-        varsMap['list2'] = "6b";
-        varsMap['list3'] = "6c";
+        varsMap['hier1'] = "ax";
+        varsMap['hier2'] = "ay";
+        varsMap['hier3'] = "az";
+        varsMap['hier4'] = "a+";
+        varsMap['hier5'] = "a-";
 
-        varsMap['hier1'] = "6d";
-        varsMap['hier2'] = "6e";
-        varsMap['hier3'] = "6f";
-        varsMap['hier4'] = "6g";
-        varsMap['hier5'] = "6h";
-
-        varsMap['pageView'] = "72";
-        varsMap["prodView"] = "73";
-        varsMap['scOpen'] = "74";
-        varsMap['scAdd'] = "75";
-        varsMap['scView'] = "76";
-        varsMap['scRemove'] = "77";
-        varsMap['scCheckout'] = "78";
-        varsMap['purchase'] = "79";
+        varsMap['pageView'] = "bl";
+        varsMap["prodView"] = "bm";
+        varsMap['scOpen'] = "bn";
+        varsMap['scAdd'] = "bo";
+        varsMap['scView'] = "bp";
+        varsMap['scRemove'] = "bq";
+        varsMap['scCheckout'] = "br";
+        varsMap['purchase'] = "bs";
 
         if (typeof _satellite.your_company === 'undefined') {
             _satellite.your_company = {};
