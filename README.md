@@ -1,7 +1,9 @@
-# Adobe Analytics Reporting 2.0
+# Adobe Analytics Reporting 2.1
 During the Adobe Summit EMEA 2019 in London I presented a new way to add a documentation direcly to workspace projects. You can read a blog post about my tip at [webanalyticsfordevelopers.com/2019/05/15/adobe-analytics-documentation-2-0/](https://webanalyticsfordevelopers.com/2019/05/15/adobe-analytics-documentation-2-0/)
 
 In this github I uploaded the whole source code as well as additional information to make it as easy as possible. I want to thank [Jan Exner](https://github.com/janexner) and [Benedikt Wedenik](http://wedenik.com/) for their help in getting the code up and running.
+
+>**ATTENTION: Update 2.1 - 2019-07-19 - read [changes](https://github.com/UrsBoller/AdobeAnalytics_ReportingProp/blob/master/README.md#change-july-2019)**
 
 ## Source code for your Adobe Analytics Tag Manager
 Either in "Adobe DTM" oder "Launch, by Adobe" you need to add code to the Adobe Analytics "Custom Code". Basically you add a new function "writeAADocuString" and call it from inside s.doPlugins. You're custom code should look something like this:
@@ -34,3 +36,13 @@ After you send your codes to Adobe Analytics by implementing the code above, you
 I strongly recommend to test the code after you add it to your Analytics Tool and before you publish for the live website. Even if we tryed to keep the code as clean and fast as possible, there might be bad situation we haven't seen yet.
 
 <strong>I do not make any warranties about the completeness, reliability and accuracy of this code. Any action you take upon the code is strictly at your own risk, and I will not be liable for any losses or damages by the code</strong>
+
+## Change July 2019
+I didn't know that some report suites in Adobe Analytics are "case insensitive". that means that the keys "AA" and "aa" get the same classified values - no differentiation possible.
+Therefore I decided to change the docuString to not contain "case sensitive" values by skipping all the upper case letters. the new string now contains only 39 characters which is just long enough to match the framework. for new implementation just use the files in this github.
+
+**steps for migration from base64 to base39**
+basically only the function [buildCachedVarsMap](https://github.com/UrsBoller/AdobeAnalytics_ReportingProp/blob/ea882ca463cb9c244d68c3b0b8b005d5531e0115/writeAADocuString.js#L181) has changed due to the new coding system. and the string now contains different values. Follow this steps to migrate to the new coding system:
+1. Replace the function [buildCachedVarsMap](https://github.com/UrsBoller/AdobeAnalytics_ReportingProp/blob/ea882ca463cb9c244d68c3b0b8b005d5531e0115/writeAADocuString.js#L181) in your property, do not forget to set the cookie name (Replace "YOUR_COMPANY" by the desired value)
+2. (optional) depending how far you setup the system, maybe it's worth changing the prop numbers to not mess with the old system. if you stick on the same prop, just make sure that you do not report on the old data (since all has changed ...). If you want, you could set a new prop for docu version (or any other version information you have) to use in a segment for filtering out old values ...
+3. Upload the new classifiations using the excel in this github. the items have the exact same order just the key changed. that means you can just replace the key column to match the new system. In the excel you'll find both the old and new keys just to have the option to compare (in case you want). Remark: I recommend to insert an \~empty\~ in all cells not used to clear out old classifications!
