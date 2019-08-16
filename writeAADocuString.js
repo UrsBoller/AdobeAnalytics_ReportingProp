@@ -137,14 +137,35 @@ var writeAADocuString = function (s) {
     }
 
     /**
-     * Build up the search string based on s.linkTrackVars and s.linkTrackEvents.
+     * Build up the search string based on s.linkTrackVars, s.linkTrackEvents and s.events
      * @returns {string}
      */
     function buildSearchStringForLinks() {
         var toSearch = s.linkTrackVars;
         if (s.linkTrackVars.indexOf('events') > -1) {
-            // linkTrackVars containts the string "events", add events to search string
-            tosearch += ',' + cleanEventString(s.linkTrackEvents); 
+
+            // Only do something if s.events is set
+            if (typeof s.events !== 'undefined' && s.events !== '') {
+
+                // Use only s.events in case s.linkTrackEvents is not set
+                if (typeof s.linkTrackEvents === 'undefined' || s.linkTrackEvents === '') {
+                    toSearch += ',' + cleanEventString(s.events);
+
+                } else {
+                    // If s.linkTrackEvents and s.events are both set
+                    // calculate the intersection and use it.
+                    var l1 = cleanEventString(s.events).split(',');
+
+                    // We don't clean linkTrackEvents explicitly as any kind of event1=123 will cause event1 to be NOT tracked
+                    // thus it will not be in the call and shall not be in the quality prop
+                    var l2 = s.linkTrackEvents.split(',');
+                    var combined = l1.filter(function (x) {
+                        return -1 !== l2.indexOf(x)
+                    }).join(',');
+
+                    toSearch += ',' + combined;
+                }
+            }
         }
         return toSearch;
     }
